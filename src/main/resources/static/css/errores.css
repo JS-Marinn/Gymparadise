@@ -1,0 +1,65 @@
+     *{
+	font-family: 'Press Start 2P', Arial, sans-serif;
+	text-shadow: 2px 2px 0 #ff0000, -2px -2px 0 #00ff00, 2px -2px 0 #0000ff, -2px 2px 0 #ffff00;
+    animation: glitch 1s infinite;
+
+	 }
+     
+      body {
+            background-color: black;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 10% 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 3em;
+        }
+
+        p {
+            font-size: 1.5em;
+        }
+
+        a {
+            color: #fcfcfc;
+            text-decoration: none;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #1b1b1b;
+            color: #fff;
+            font-size: 1.2em;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #333;
+        }
+        @keyframes glitch {
+    0% {
+        text-shadow: 2px 2px 0 #ff0000, -2px -2px 0 #00ff00, 2px -2px 0 #0000ff, -2px 2px 0 #ffff00;
+    }
+    25% {
+        text-shadow: -2px -2px 0 #ff0000, 2px 2px 0 #00ff00, -2px 2px 0 #0000ff, 2px -2px 0 #ffff00;
+    }
+    50% {
+        text-shadow: 2px -2px 0 #ff0000, -2px 2px 0 #00ff00, 2px 2px 0 #0000ff, -2px -2px 0 #ffff00;
+    }
+    75% {
+        text-shadow: -2px 2px 0 #ff0000, 2px -2px 0 #00ff00, -2px -2px 0 #0000ff, 2px 2px 0 #ffff00;
+    }
+    100% {
+        text-shadow: 2px 2px 0 #ff0000, -2px -2px 0 #00ff00, 2px -2px 0 #0000ff, -2px 2px 0 #ffff00;
+    }
+}

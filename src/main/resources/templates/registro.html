@@ -1,0 +1,146 @@
+<html lang="en" html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="/css/registro.css">
+	<link rel="stylesheet" type="text/css" href="css/nav-bar.css">
+	<script type="text/javascript" src="/js/registro.js"></script>
+	<link rel="shortcut icon" href="/assets/img/GymLogo.ico">
+	<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+		integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<script type="text/javascript" src="js/login.js"> </script>
+	<title th:text="#{Registro}"> Registro </title>
+</head>
+
+<body>
+
+	<header>
+		<div class="navbar">
+			<div class="logo"> <a th:href="@{/}">Gym Paradise</a>
+		    </div>
+			<ul class="links">
+				<li><a th:href="@{/}" th:text="#{inicio}">Inicio</a></li>
+				<li><a th:href="@{/tmb}" th:text="#{calculadora_tmb}">Calculadora de calorías</a></li>
+				<li><a th:href="@{/rmcalculator}" th:text="#{calculadora_rm}">Calculadora de RM</a></li>
+				<li><a th:href="@{/peso/}" th:text="#{registrar_peso}">Registra tu peso</a></li>
+			</ul>
+			<div class="language-dropdown">
+				<div class="custom-select">
+					<select id="language-select" class="language-select">
+						<option selected disabled value="null" th:text="#{idioma}">
+						<option value="/change-language?lang=es">Español</option>
+						<option value="/change-language?lang=en">English</option>
+						<option value="/change-language?lang=ru">Русский</option>
+						<option value="/change-language?lang=ja">日本語</option>
+					</select>
+					<span class="icon"><i class="fa-solid fa-globe"></i></span>
+				</div>
+			</div>
+			
+			<a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="action_btn" th:text="#{iniciar}">Iniciar sesión</a>
+			<a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="action_btn" th:text="#{cerrar}">Cerrar sesión</a>
+			<div class="toggle_Btn" onclick="openMenu()">
+				<i class="fa-solid fa-bars"></i>
+			</div>
+		</div>
+	</header>
+
+
+	<div class="dropdown_menu">
+		<li><a th:href="@{/}" th:text="#{inicio}">Inicio</a></li>
+		<li><a th:href="@{/tmb}" th:text="#{calculadora_tmb}">Calculadora de calorías</a></li>
+		<li><a th:href="@{/rmcalculator}" th:text="#{calculadora_rm}">Calculadora de RM</a></li>
+		<li><a th:href="@{/peso/}" th:text="#{registrar_peso}">Registra tu peso</a></li>
+		<li sec:authorize="!isAuthenticated()"><a th:href="@{/login}" class="action_btn" th:text="#{iniciar}">Iniciar sesión</a></li>
+		<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}" class="action_btn" th:text="#{cerrar}">Cerrar sesión</a></li>
+	</div>
+
+	<div class="wrapper">
+		<div class="form-box">
+			<div class="register-container" id="register">
+				<form th:action="@{/registro}" method="post" th:object="${usuario}">
+					<div class="top">
+                    <span th:text="#{registro_iniciar_sesion}">Tienes una cuenta? </span> <span><a th:href="@{/login}" th:text="#{registro_ir_sesion}">Inicia sesión</a></span>
+						<div class="header" th:text="#{registro_registrate}">Registrate</div>
+					</div>
+
+					<div class="one-form">
+						<label for="nombre">
+							<div class="input-box">
+
+								<div class="error-message" th:text="#{nombre.invalid}" id="nombre_invalido">El campo 'Nombres' solo debe contener letras y espacios.</div>
+
+								<input type="text" class="input-field" th:placeholder="#{registro_nombre}" id="nombre"
+									th:field="*{nombre}" required autofocus="autofocus">
+								<i class="bx bx-user"></i>
+							</div>
+					</div>
+
+					<div class="one-form">
+						<label for="apellido">
+
+							<div class="error-message" th:text="#{apellido.invalid}" id="nombre_invalido">El campo 'Apellidos' solo debe contener letras y espacios.</div>
+
+							<div class="input-box">
+								<input type="text" class="input-field" th:placeholder="#{registro_apellido}" id="apellido" th:field="*{apellido}" required autofocus="autofocus">
+								<i class="bx bx-user"></i>
+							</div>
+					</div>
+					<div class="input-box">
+						<label for="email">
+
+							<div class="error-message" th:text="#{email.invalid}" id="nombre_invalido">Ingresar una dirección de correo válida o no registrada.</div>
+
+							<input type="text" class="input-field" th:placeholder="#{registro_correo}" id="email" th:field="*{email}" required autofocus="autofocus">
+							<i class="bx bx-envelope"></i>
+					</div>
+
+					<div class="input-box">
+						<label for="password">
+
+							<div class="error-message" th:text="#{password.invalid}" id="nombre_invalido">La contraseña debe tener al menos 8 caracteres, incluyendo al menos un número y una mayúscula.</div>
+
+							<input type="password" class="input-field" th:placeholder="#{registro_password}" id="password" th:field="*{password}" required autofocus="autofocus">
+							<i class="bx bx-lock-alt"></i>
+					</div>
+
+					<div class="input-box">
+						<input type="submit" class="submit" th:value="#{registro_enviar}">
+					</div>
+					<div th:if="${param.exito}" class="custom-success-alert">
+						<div class="alert alert-info" th:text="#{registro_exitoso}">Se ha registrado exitosamente a la aplicación</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- Footer -->
+
+	<footer>
+		<div class="footer-content">
+			<figure>
+				<img src="/assets/img/Gymlogo.png" alt="Descripción de la imagen">
+			</figure>
+			<p th:text="#{footer_texto}">
+				Gym Paradise es un sitio web el cual busca que sus usuarios consigan su mejor versión física,
+				brindandoles herramientas
+				que los guíen en su proceso, herramientas tales como calculadoras de calorías o de maximo levantamiento,
+				así como un registro
+				de su peso para ver su progreso
+			</p>
+			<ul class="socials">
+				<li><a href="https://www.facebook.com" target="_blank"><i class="fa fa-facebook"></i></a></li>
+				<li><a href="https://www.instagram.com/sebastian_rodriguez097/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+				<li><a href="https://github.com/JS-Marinn" target="_blank"><i class="fa fa-github"></i></a></li>
+				<li><a href="https://www.linkedin.com/in/juan-sebastián-marín-rodríguez-592a77296/" target="_blank"><i class="fa fa-linkedin-square"></i></a></li>
+			</ul>
+		</div>
+		<div class="footer-bottom">
+			<p>copyright &copy;2023 Gym Paradise. designed by <span>Js-Marinn</span></p>
+		</div>
+	</footer>
+
+</html>

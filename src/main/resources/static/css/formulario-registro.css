@@ -1,0 +1,143 @@
+/* Estilo para el contenedor del formulario */
+.formulario-container {
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #E0E5E8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilo para los elementos del formulario */
+form {
+    width: 60%;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+input[type="text"],
+input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+/* Estilo para los botones */
+.boton-guardar,
+.boton-volver {
+    background-color: green;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.boton-volver {
+    background-color: blue;
+}
+
+.boton-volver:hover {
+    background-color: darkblue;
+}
+
+.boton-guardar:hover {
+    background-color: darkgreen;
+}
+
+/* Centra los botones en un contenedor */
+.botones {
+    text-align: center;
+}
+
+@media screen and (max-width: 480px) {
+    .formulario-container {
+        padding: 10px; /* Reduce el espaciado interno del contenedor en pantallas pequeñas */
+    }
+    form {
+        width: 100%; /* Hacer que el formulario ocupe todo el ancho disponible */
+        padding: 10px; /* Reduce el espaciado interno del formulario en pantallas pequeñas */
+    }
+    label {
+        margin-bottom: 5px; /* Reduce el espaciado entre etiquetas en pantallas pequeñas */
+    }
+    input[type="text"],
+    input[type="date"] {
+        width: 100%; /* Hacer que los campos de entrada ocupen todo el ancho disponible */
+        padding: 8px; /* Reduce el espaciado interno de los campos de entrada en pantallas pequeñas */
+        margin-bottom: 10px; /* Reduce el espaciado entre campos de entrada en pantallas pequeñas */
+    }
+    /* Estilo para los botones en pantallas pequeñas */
+    .boton-guardar,
+    .boton-volver {
+        padding: 8px 15px;
+    }
+
+    /* Modificaciones específicas para dispositivos móviles */
+    .formulario-container {
+        padding: 5px;
+    }
+    form {
+        padding: 5px;
+    }
+    label {
+        font-size: 14px;
+    }
+    input[type="text"],
+    input[type="date"] {
+        font-size: 14px;
+    }
+    .boton-guardar,
+    .boton-volver {
+        font-size: 14px;
+        padding: 5px 10px;
+    }
+}
+
+/* Estilos para la alerta de éxito personalizada */
+.custom-success-alert {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.custom-success-alert .alert {
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.custom-success-alert .alert.alert-info {
+    background-color: #5cb85c; /* Color de éxito (verde) */
+    color: red;
+}
+
+/* Estilo para campos con errores */
+.input-error {
+    border: 2px solid #ff6347; /* Color de borde rojo en caso de error */
+}
+
+.error-message {
+    font-size: 14px;
+    margin-top: 5px;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+@media screen and (max-width: 280px) {
+    .formulario-container {
+        margin: 0 auto;
+        height: 60%;
+        padding: 20px;
+        background-color: #E0E5E8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

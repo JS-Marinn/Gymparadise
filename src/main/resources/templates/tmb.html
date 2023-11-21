@@ -1,0 +1,254 @@
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="/css/tmb.css">
+	<link rel="stylesheet" type="text/css" href="css/nav-bar.css">
+	<script type="text/javascript" src="js/tmb.js"> </script>
+	<link rel="shortcut icon" href="/assets/img/GymLogo.ico">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+		integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<title th:text="#{tmb_titulo}">Tasa metábolica basal</title>
+</head>
+
+<body>
+
+	<!-- Nav bar -->
+
+	<header>
+		<div class="navbar">
+			<div class="logo"> <a th:href="@{/}">Gym Paradise</a>
+		    </div>
+			<ul class="links">
+				<li><a th:href="@{/}" th:text="#{inicio}">Inicio</a></li>
+				<li><a th:href="@{/tmb}" th:text="#{calculadora_tmb}">Calculadora de calorías</a></li>
+				<li><a th:href="@{/rmcalculator}" th:text="#{calculadora_rm}">Calculadora de RM</a></li>
+				<li><a th:href="@{/peso/}" th:text="#{registrar_peso}">Registra tu peso</a></li>
+			</ul>
+			<div class="language-dropdown">
+				<div class="custom-select">
+					<select id="language-select" class="language-select">
+						<option selected disabled value="null" th:text="#{idioma}">
+						<option value="/change-language?lang=es">Español</option>
+						<option value="/change-language?lang=en">English</option>
+						<option value="/change-language?lang=ru">Русский</option>
+						<option value="/change-language?lang=ja">日本語</option>
+					</select>
+					<span class="icon"><i class="fa-solid fa-globe"></i></span>
+				</div>
+			</div>
+			
+			<a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="action_btn" th:text="#{iniciar}">Iniciar sesión</a>
+			<a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="action_btn" th:text="#{cerrar}">Cerrar sesión</a>
+			<div class="toggle_Btn" onclick="openMenu()">
+				<i class="fa-solid fa-bars"></i>
+			</div>
+		</div>
+	</header>
+
+
+	<div class="dropdown_menu">
+		<li><a th:href="@{/}" th:text="#{inicio}">Inicio</a></li>
+		<li><a th:href="@{/tmb}" th:text="#{calculadora_tmb}">Calculadora de calorías</a></li>
+		<li><a th:href="@{/rmcalculator}" th:text="#{calculadora_rm}">Calculadora de RM</a></li>
+		<li><a th:href="@{/peso/}" th:text="#{registrar_peso}">Registra tu peso</a></li>
+		<li sec:authorize="!isAuthenticated()"><a th:href="@{/login}" class="action_btn" th:text="#{iniciar}">Iniciar sesión</a></li>
+		<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}" class="action_btn" th:text="#{cerrar}">Cerrar sesión</a></li>
+	</div>
+
+	<!-- Contenido  -->
+
+	<main id="container">
+		<section id="img">
+			<img src="/assets/img/illustration.svg" alt="Hombre y mujer levantando mancuernas al lado de un florero">
+			<p th:text="#{tmb_p}"> La información contenida en estos temas no pretende ni será nunca un sustituto de
+				consejo médico profesional, se proporcionan para los propósitos educativos solamente. Usted asume la
+				responsabilidad de cómo decide utilizar esta información. </p>
+		</section>
+
+		<section id="calculator">
+			<form id="form">
+				<i class="fas fa-info-circle info-icon" th:title="#{tmb_data}"></i>
+				<h1 id="title" th:text="#{tmb_h1}">
+					Calculadora - TMB || IMC
+				</h1>
+
+				<div class="input-box">
+					<label for="weight" th:text="#{tmb_peso}">
+						Peso en kg
+					</label>
+					<div class="input-field">
+						<i class="fa-solid fa-weight-scale"></i>
+						<input type="number" id="weight" name="weight" required>
+						<span>
+							Kg
+						</span>
+					</div>
+				</div>
+
+				<div class="input-box">
+					<label for="height" th:text="#{tmb_altura}">
+						Altura en centimetros
+					</label>
+					<div class="input-field">
+						<i class="fa-solid fa-ruler"></i>
+						<input type="number" step="0.01" id="height" name="height" required>
+						<span>
+							cm
+						</span>
+					</div>
+				</div>
+
+				<div class="input-box">
+					<label for="age" th:text="#{tmb_edad}">
+						Edad
+					</label>
+					<div class="input-field">
+						<i class="fa-regular fa-calendar-days"></i>
+						<input type="number" step="0.01" id="age" name="age" required>
+						<span th:text="#{tmb_age}">
+							Años
+						</span>
+					</div>
+				</div>
+
+				<div class="input-box">
+					<label for="sex" th:text="#{tmb_sexo}">
+						Sexo
+					</label>
+					<div class="input-field">
+						<i class="fa-solid fa-venus-mars"></i>
+						<select class="input-field" step="0.01" id="sex" name="sex" required>
+							<option selected disabled value="null" th:text="#{tmb_seleccion_sexo}"> Selecciona tu sexo </option>
+							<option value="1" th:text="#{tmb_hombre}"> Hombre </option>
+							<option value="2" th:text="#{tmb_mujer}"> Mujer </option>
+						</select>
+					</div>
+				</div>
+
+				<div class="input-box">
+					<label for="physicalActivity" th:text="#{tmb_actividad}">
+						Actividad física
+					</label>
+					<div class="input-field">
+						<i class="fa-solid fa-dumbbell"></i>
+						<select class="input-field" step="0.01" id="physicalActivity" name="physicalActivity" required>
+							<option selected disabled value="null" th:text="#{tmb_seleccion_actividad}"> Selecciona tu
+								actividad física </option>
+							<option value="1" th:text="#{tmb_poco}"> Poco o ninguno </option>
+							<option value="2" th:text="#{tmb_ligero}"> Ejercicio ligero (1-3 días por semana) </option>
+							<option value="3" th:text="#{tmb_moderado}"> Ejercicio moderado (3-5 días por semana)
+							</option>
+							<option value="4" th:text="#{tmb_vigoroso}"> Ejercicio vigoroso (6-7 días por semana)
+							</option>
+							<option value="5" th:text="#{tmb_muy_vigoroso}"> Ejercicio muy vigoroso (dos veces al día)
+							</option>
+						</select>
+					</div>
+				</div>
+				<button id="calculate" onclick=" bmi()" th:text="#{tmb_calcular}">
+					Calcular
+				</button>
+			</form>
+			<div id="infos" class="hidden">
+				<div id="result">
+					<div id="bmi">
+						<span id="value"></span>
+						<span th:text="#{tmb_imc}">Su IMC</span>
+					</div>
+					<div id="description">
+						<span></span>
+					</div>
+				</div>
+				<table>
+					<caption th:text="#{tmb_reparto}">Reparto de Macronutrientes en Gramos Diarios</caption>
+					<thead>
+						<tr>
+							<th></th>
+							<th th:text="#{tmb_definicion}">Definición</th>
+							<th th:text="#{tmb_mantenimiento}">Mantenimiento</th>
+							<th th:text="#{tmb_volumen}">Volumen</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td th:text="#{tmb_proteina}">Proteinas
+								<hr>
+							</td>
+							<td id="proteinCut"></td>
+							<td id="proteinMaintenance"></td>
+							<td id="proteinBulk"></td>
+						</tr>
+						<tr>
+							<td th:text="#{tmb_grasas}"> Grasas
+								<hr>
+							</td>
+							<td id="fatCut"></td>
+							<td id="fatMaintenance"></td>
+							<td id="fatBulk"></td>
+						</tr>
+						<tr>
+							<td th:text="#{tmb_carbohidratos}"> Carbohidratos
+								<hr>
+							</td>
+							<td id="carbsCut"></td>
+							<td id="carbsMaintenance"></td>
+							<td id="carbsBulk"></td>
+						</tr>
+						<tr>
+							<td th:text="#{tmb_calorias}">Calorias
+								<hr>
+							</td>
+							<td id="caloriesCut"></td>
+							<td id="caloriesMaintenance"></td>
+							<td id="caloriesBulk"></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<div id="more_info">
+					<a href="https://www.cdc.gov/healthyweight/spanish/assessing/bmi/adult_bmi/index.html"
+						target="_blank" th:text="#{tmb_informacion}">
+						Más información sobre la tasa metábolica basal
+						<i class="fa-solid fa-arrow-up-right-from-square"></i>
+					</a>
+				</div>
+			</div>
+
+		</section>
+	</main>
+
+	<!-- Footer -->
+
+	<footer>
+		<div class="footer-content">
+			<figure>
+				<img src="/assets/img/Gymlogo.png" alt="Descripción de la imagen">
+			</figure>
+			<p th:text="#{footer_texto}">
+				Gym Paradise es un sitio web el cual busca que sus usuarios consigan su mejor versión física,
+				brindandoles herramientas
+				que los guíen en su proceso, herramientas tales como calculadoras de calorías o de maximo levantamiento,
+				así como un registro
+				de su peso para ver su progreso
+			</p>
+			<ul class="socials">
+				<li><a href="https://www.facebook.com" target="_blank"><i class="fa fa-facebook"></i></a></li>
+				<li><a href="https://www.instagram.com/sebastian_rodriguez097/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+				<li><a href="https://github.com/JS-Marinn" target="_blank"><i class="fa fa-github"></i></a></li>
+				<li><a href="https://www.linkedin.com/in/juan-sebastián-marín-rodríguez-592a77296/" target="_blank"><i class="fa fa-linkedin-square"></i></a></li>
+			</ul>
+		</div>
+		<div class="footer-bottom">
+			<p>copyright &copy;2023 Gym Paradise. designed by <span>Js-Marinn</span></p>
+		</div>
+	</footer>
+	
+	<!-- Bootstrap JS y dependencias Popper.js y jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

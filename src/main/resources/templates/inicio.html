@@ -1,0 +1,142 @@
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="/css/inicio.css">
+	<link rel="stylesheet" type="text/css" href="/css/nav-bar.css">
+	<link rel="shortcut icon" href="/assets/img/GymLogo.ico">
+	<script type="text/javascript" src="/js/home.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+		integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<title th:text="#{inicio}">Inicio</title>
+
+</head>
+
+<body>
+	<!-- Nav bar -->
+	<header>
+		<div class="navbar">
+			<div class="logo"> <a th:href="@{/}">Gym Paradise</a>
+		    </div>
+			<ul class="links">
+				<li><a th:href="@{/}" th:text="#{inicio}">Inicio</a></li>
+				<li><a th:href="@{/tmb}" th:text="#{calculadora_tmb}">Calculadora de calorías</a></li>
+				<li><a th:href="@{/rmcalculator}" th:text="#{calculadora_rm}">Calculadora de RM</a></li>
+				<li><a th:href="@{/peso/}" th:text="#{registrar_peso}">Registra tu peso</a></li>
+			</ul>
+			<div class="language-dropdown">
+				<div class="custom-select">
+					<select id="language-select" class="language-select">
+						<option selected disabled value="null" th:text="#{idioma}">
+						<option value="/change-language?lang=es">Español</option>
+						<option value="/change-language?lang=en">English</option>
+						<option value="/change-language?lang=ru">Русский</option>
+						<option value="/change-language?lang=ja">日本語</option>
+					</select>
+					<span class="icon"><i class="fa-solid fa-globe"></i></span>
+				</div>
+			</div>
+			
+			<a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="action_btn" th:text="#{iniciar}">Iniciar sesión</a>
+			<a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="action_btn" th:text="#{cerrar}">Cerrar sesión</a>
+			<div class="toggle_Btn" onclick="openMenu()">
+				<i class="fa-solid fa-bars"></i>
+			</div>
+		</div>
+	</header>
+
+
+	<div class="dropdown_menu">
+		<li><a th:href="@{/}" th:text="#{inicio}">Inicio</a></li>
+		<li><a th:href="@{/tmb}" th:text="#{calculadora_tmb}">Calculadora de calorías</a></li>
+		<li><a th:href="@{/rmcalculator}" th:text="#{calculadora_rm}">Calculadora de RM</a></li>
+		<li><a th:href="@{/peso/}" th:text="#{registrar_peso}">Registra tu peso</a></li>
+		<li sec:authorize="!isAuthenticated()"><a th:href="@{/login}" class="action_btn" th:text="#{iniciar}">Iniciar sesión</a></li>
+		<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}" class="action_btn" th:text="#{cerrar}">Cerrar sesión</a></li>
+	</div>
+
+
+	<!-- Contenido  -->
+
+	<main>
+		<section id="hero">
+			<h1> Gym Paradise </h1>
+			<p th:text="#{inicio_texto_motivador}"> "El dolor es temporal, pero la gloria es eterna"</p>
+		</section>
+		<section id="services">
+			<div class="title-cards">
+				<h2 th:text="#{inicio_servicio}">Servicios que ofrecemos</h2>
+			</div>
+			<div class="container-card">
+				<div class="card">
+					<figure>
+						<img src=https://e0.pxfuel.com/wallpapers/12/589/desktop-wallpaper-gym-gym-black.jpg alt="Hombre realizando press banca">
+					</figure>
+					<div class="contenido-card">
+						<h3 th:text="#{inicio_rm}"> Calcula tu RM </h3>
+						<p th:text="#{inicio_rm_texto}"> Podemos calcular aproximadamente cuantas repiticiones puedes
+							hacer con el peso que elijas
+							para romper tus records cada día</p>
+						<a th:href="@{/rmcalculator}" th:text="#{inicio_vermas}">Ver Más</a>
+					</div>
+				</div>
+				<div class="card">
+					<figure>
+						<img
+							src=https://hiraoka.com.pe/media/mageplaza/blog/post/c/o/como_usar_una_balanza_para_conocer_mi_peso_ideal_1.jpg alt="Mujer descalza pesándose en una báscula">
+					</figure>
+					<div class="contenido-card">
+						<h3 th:text="#{inicio_peso}"> Registra tu peso </h3>
+						<p th:text="#{inicio_peso_texto}"> Llevaremos un registro de tu peso diario para que puedas ver
+							el historial y tener total
+							noción de como ha evolucionado tu cuerpo</p>
+						<a th:href="@{/peso/}" th:text="#{inicio_vermas}">Ver Más</a>
+					</div>
+				</div>
+				<div class="card">
+					<figure>
+						<img src="https://s1.1zoom.me/big0/272/Bananas_Fruit_Grapes_Pomegranate_Apples_Gray_595526_1280x853.jpg" alt="Comida saludable, cubiertos y una libreta">
+					</figure>
+					<div class="contenido-card">
+						<h3 th:text="#{inicio_tmb}"> Calculadora tus calorias </h3>
+						<p th:text="#{inicio_tmb_texto}"> Te ayudamos a saber cuantas calorías debes consumir para
+							cumplir tus objetivos y te
+							enseñamos tu tasa metábolica basal e indice de masa corporal </p>
+						<a th:href="@{/tmb}" th:text="#{inicio_vermas}">Ver Más</a>
+					</div>
+		</section>
+		</div>
+	</main>
+
+	
+	<!-- Footer -->
+
+	<footer>
+		<div class="footer-content">
+			<figure>
+				<img src="/assets/img/Gymlogo.png" alt="Descripción de la imagen">
+			</figure>
+			<p th:text="#{footer_texto}">
+				Gym Paradise es un sitio web el cual busca que sus usuarios consigan su mejor versión física,
+				brindandoles herramientas
+				que los guíen en su proceso, herramientas tales como calculadoras de calorías o de maximo levantamiento,
+				así como un registro
+				de su peso para ver su progreso
+			</p>
+			<ul class="socials">
+				<li><a href="https://www.facebook.com" target="_blank"><i class="fa fa-facebook"></i></a></li>
+				<li><a href="https://www.instagram.com/sebastian_rodriguez097/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+				<li><a href="https://github.com/JS-Marinn" target="_blank"><i class="fa fa-github"></i></a></li>
+				<li><a href="https://www.linkedin.com/in/juan-sebastián-marín-rodríguez-592a77296/" target="_blank"><i class="fa fa-linkedin-square"></i></a></li>
+			</ul>
+		</div>
+		<div class="footer-bottom">
+			<p>copyright &copy;2023 Gym Paradise. designed by <span>Js-Marinn</span></p>
+		</div>
+	</footer>
+</body>
+
+</html>

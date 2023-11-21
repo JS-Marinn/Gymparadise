@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" href="/css/errores.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+<link rel="shortcut icon" href="/assets/img/GymLogo.ico">
+<title th:text="#{500_titulo}"> Error 500 - Error interno del servidor </title>
+</head>
+<body>
+    <div class="container">
+        <h1 th:text="#{500_h1}">Error 500 </h1> 
+        <p th:text="#{500_p}">Lo sentimos, ha ocurrido un error interno en el servidor.</p>
+        <a href="/" class="btn" th:text="#{500_a}">Volver a la página de inicio</a>
+    </div>
+</body>
+</html>

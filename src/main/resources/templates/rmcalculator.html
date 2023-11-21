@@ -1,0 +1,254 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/rmcalculator.css">
+    <link rel="stylesheet" type="text/css" href="css/nav-bar.css">
+    <link rel="shortcut icon" href="/assets/img/GymLogo.ico">
+    <script type="text/javascript" src="js/rmcalculator.js"> </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title th:text="#{rm_titulo}"> Calculadora RM </title>
+
+</head>
+<body>
+
+  <!-- Nav bar -->
+
+  <header>
+		<div class="navbar">
+			<div class="logo"> <a th:href="@{/}">Gym Paradise</a>
+		    </div>
+			<ul class="links">
+				<li><a th:href="@{/}" th:text="#{inicio}">Inicio</a></li>
+				<li><a th:href="@{/tmb}" th:text="#{calculadora_tmb}">Calculadora de calorías</a></li>
+				<li><a th:href="@{/rmcalculator}" th:text="#{calculadora_rm}">Calculadora de RM</a></li>
+				<li><a th:href="@{/peso/}" th:text="#{registrar_peso}">Registra tu peso</a></li>
+			</ul>
+			<div class="language-dropdown">
+				<div class="custom-select">
+					<select id="language-select" class="language-select">
+						<option selected disabled value="null" th:text="#{idioma}">
+						<option value="/change-language?lang=es">Español</option>
+						<option value="/change-language?lang=en">English</option>
+						<option value="/change-language?lang=ru">Русский</option>
+						<option value="/change-language?lang=ja">日本語</option>
+					</select>
+					<span class="icon"><i class="fa-solid fa-globe"></i></span>
+				</div>
+			</div>
+			
+			<a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="action_btn" th:text="#{iniciar}">Iniciar sesión</a>
+			<a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="action_btn" th:text="#{cerrar}">Cerrar sesión</a>
+			<div class="toggle_Btn" onclick="openMenu()">
+				<i class="fa-solid fa-bars"></i>
+			</div>
+		</div>
+	</header>
+
+
+	<div class="dropdown_menu">
+		<li><a th:href="@{/}" th:text="#{inicio}">Inicio</a></li>
+		<li><a th:href="@{/tmb}" th:text="#{calculadora_tmb}">Calculadora de calorías</a></li>
+		<li><a th:href="@{/rmcalculator}" th:text="#{calculadora_rm}">Calculadora de RM</a></li>
+		<li><a th:href="@{/peso/}" th:text="#{registrar_peso}">Registra tu peso</a></li>
+		<li sec:authorize="!isAuthenticated()"><a th:href="@{/login}" class="action_btn" th:text="#{iniciar}">Iniciar sesión</a></li>
+		<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}" class="action_btn" th:text="#{cerrar}">Cerrar sesión</a></li>
+	</div>
+  
+  <!-- Contenido  -->
+
+  <main id="container">
+    <section id="img">
+        <img src="/assets/img/bicycle-0.svg" alt="Hombre realizando curl concentrado">
+        <p th:text="#{rm_p}"> La información contenida en estos temas no pretende ni será nunca un sustituto de consejo médico profesional, se proporcionan para los propósitos educativos solamente. Usted asume la responsabilidad de como decide utilizar esta información. </p>
+    </section>
+
+    <section id="calculator">
+      <form id="form">
+        <i class="fas fa-info-circle info-icon" th:title="#{rm_data}"></i>
+
+        <h1 id="title" th:text="#{rm_h1}">
+            Calculadora - RM
+        </h1>
+    
+        <div class="input-box">
+            <label for="weight" th:text="#{rm_peso}">
+                Peso en kg
+            </label>
+            <div class="input-field">
+                <i class="fa-solid fa-weight-hanging"></i>
+                <input type="number" id="weight" name="weight" required>
+                <span>
+                    Kg
+                </span>
+            </div>
+        </div>
+    
+        <div class="input-box">
+            <label for="reps" th:text="#{rm_fallo}">
+                Repeticiones al fallo
+            </label>
+            <div class="input-field">
+                <i class="fa-solid fa-repeat"></i>
+                <input type="number" step="0.01" id="reps" name="reps" required>
+                <span>
+                    Reps
+                </span>
+            </div>
+        </div>
+        
+        <button id="calculate" onclick="RM(); aumentarAlturaPantalla(altura)" th:text="#{rm_calcular}">
+            Calcular
+        </button>
+    </form>
+        
+        <div id="infos" class="hidden">
+            <table>
+              <caption th:text="#{rm_rm}">Porcentajes de RM</caption>
+              <thead>
+                <tr>
+                  <th th:text="#{rm_porcentaje}">Porcentaje de 1RM</th>
+                  <th th:text="#{rm_peso_porcentaje}">Peso</th>
+                  <th th:text="#{rm_peso_repeticiones}">Repeticiones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>100%</td>
+                  <td id="RM1"></td>
+                  <td>1</td>
+                </tr>
+                <tr>
+                  <td> 95%</td>
+                  <td id="RM95"></td>
+                  <td>2</td>
+                </tr>
+                <tr>
+                  <td> 90%</td>
+                  <td id="RM90"></td>
+                  <td>4</td>
+                </tr>
+                <tr>
+                  <td>85%</td>
+                  <td id="RM85"></td>
+                  <td>6</td>
+                </tr>
+                <tr>
+                  <td>80%</td>
+                  <td id="RM80"></td>
+                  <td>8</td>
+                </tr>
+                <tr>
+                  <td>75%</td>
+                  <td id="RM75"></td>
+                  <td>10</td>
+                </tr>
+                <tr>
+                  <td>70%</td>
+                  <td id="RM70"></td>
+                  <td>12</td>
+                </tr>
+                <tr>
+                  <td>65%</td>
+                  <td id="RM65"></td>
+                  <td>16</td>
+                </tr>
+
+                <tr>
+                  <td>60%</td>
+                  <td id="RM60"></td>
+                  <td>20</td>
+                </tr>
+                <tr>
+                  <td>55%</td>
+                  <td id="RM55"></td>
+                  <td>24</td>
+                </tr>
+                <tr>
+                  <td>50%</td>
+                  <td id="RM50"></td>
+                  <td>26~30</td>
+                </tr>
+                  </tbody>
+                </table>
+
+            <table>
+              <caption th:text="#{rm_no_calculable}">Repeticiones no calculables</caption>
+              <thead>
+                <tr>
+                  <th th:text="#{rm_1rm}">Porcentaje de 1RM</th>
+                  <th th:text="#{rm_no_calculable_peso}">Peso</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>45%</td>
+                  <td id="RM45"></td>
+                </tr>
+                <tr>
+                  <td>40%</td>
+                  <td id="RM40"></td>
+                </tr>
+                <tr>
+                  <td>35%</td>
+                  <td id="RM35"></td>
+                </tr>
+                <td>30%</td>
+                  <td id="RM30"></td>
+                </tr>
+                <tr>
+                  <td>25%</td>
+                  <td id="RM25"></td>
+                </tr>
+                <td>20%</td>
+                  <td id="RM20"></td>
+                </tr>
+                <tr>
+                  <td>15%</td>
+                  <td id="RM15"></td>
+                </tr>
+                <td>10%</td>
+                <td id="RM10"></td>
+              </tr>
+              </tbody>
+            </table>
+
+            <div id="more_info">
+                <a href="https://g-se.com/1-rm-repeticion-maxima-bp-g57cfb26e79cb1" target="_blank" th:text="#{rm_info}">
+                    Más información sobre el RM
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+            </div>
+        </div> 
+
+            
+    </section>
+</main>
+
+  <!-- Footer -->
+
+  <footer>
+		<div class="footer-content">
+			<figure>
+				<img src="/assets/img/Gymlogo.png" alt="Descripción de la imagen">
+			</figure>
+			<p th:text="#{footer_texto}">
+				Gym Paradise es un sitio web el cual busca que sus usuarios consigan su mejor versión física,
+				brindandoles herramientas
+				que los guíen en su proceso, herramientas tales como calculadoras de calorías o de maximo levantamiento,
+				así como un registro
+				de su peso para ver su progreso
+			</p>
+			<ul class="socials">
+				<li><a href="https://www.facebook.com" target="_blank"><i class="fa fa-facebook"></i></a></li>
+				<li><a href="https://www.instagram.com/sebastian_rodriguez097/" target="_blank"><i class="fa fa-instagram"></i></a></li>
+				<li><a href="https://github.com/JS-Marinn" target="_blank"><i class="fa fa-github"></i></a></li>
+				<li><a href="https://www.linkedin.com/in/juan-sebastián-marín-rodríguez-592a77296/" target="_blank"><i class="fa fa-linkedin-square"></i></a></li>
+			</ul>
+		</div>
+		<div class="footer-bottom">
+			<p>copyright &copy;2023 Gym Paradise. designed by <span>Js-Marinn</span></p>
+		</div>
+	</footer>
+</html>

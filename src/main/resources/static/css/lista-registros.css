@@ -1,0 +1,128 @@
+/* Estilo para la tabla */
+.tabla-container {
+    margin: 0 auto;  /* Centra el contenedor horizontalmente */
+    padding: 20px;
+    background-color: #E0E5E8;
+    display: flex;
+    align-items:baseline;
+    justify-content: center;
+    min-height: 60vh;
+}
+
+/* Estilo para la tabla */
+table {
+    width: 60%; /* Hacer que la tabla ocupe todo el ancho disponible */
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 10px; /* Agrega un radio de 10px a los bordes de la tabla */
+    margin-bottom: 20px;
+}
+
+table, th, td {
+    color: #000;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    color: #000;
+}
+
+thead {
+    background-color: #92A1A5;
+    color: #fff;
+}
+
+/* Estilo para los enlaces de editar y eliminar */
+table a {
+    text-decoration: none;
+    padding: 5px 10px;
+}
+
+a.editar {
+    background-color: orange;
+    color: #fff;
+    border: 1px solid orange;
+    border-radius: 5px;
+}
+
+a.eliminar {
+    background-color: red;
+    color: #fff;
+    border: 1px solid red;
+    border-radius: 5px;
+}
+
+a.editar:hover {
+    background-color: saddlebrown;
+    border: 1px solid saddlebrown;
+}
+
+a.eliminar:hover {
+    background-color: darkred;
+    border: 1px solid darkred;
+}
+
+/* Espacio para el enlace "Agregar Nuevo Registro" */
+.agregar-nuevo {
+    text-align: center; /* Centra el enlace en la pantalla */
+    margin-top: 20px;   /* Espacio superior */
+    margin-bottom: 20px; /* Espacio inferior */
+}
+
+/* Estilo para el enlace "Agregar Nuevo Registro" */
+a.agregar {
+    background-color: green; /* Color de fondo del enlace */
+    color: #fff;           /* Color del texto */
+    padding: 10px 20px;     /* Espaciado interno del enlace */
+    border-radius: 5px;    /* Borde redondeado */
+    text-decoration: none; /* Sin subrayado */
+}
+
+a.agregar:hover {
+    background-color: darkgreen; /* Color de fondo al pasar el mouse */
+}
+
+tbody tr:hover {
+    background-color: #555; /* Cambia el fondo al pasar el cursor por encima */
+    color: #fff; /* Cambia el color del texto */
+}
+
+.dropdown_menu a{
+  text-decoration: none;
+  color: #000;
+  font-size: 1rem;
+}
+.action_btn {
+    color: #fff !important;
+}
+/* Media query para hacer la tabla responsiva */
+@media screen and (max-width: 768px) {
+    .tabla-container {
+        display: block;
+        padding: 10px;
+    }
+    table {
+        width: 100%;
+    }
+}
+@media screen and (max-width: 415px) {
+    .tabla-container {
+        padding: 5px; /* Reduce el espaciado interno del contenedor */
+    }
+    table {
+        width: 100%; /* Hacer que la tabla ocupe todo el ancho disponible */
+    }
+    th, td {
+        padding: 5px; /* Reduce el espaciado interno de las celdas */
+        font-size: 12px; /* Reduce el tamaño de fuente en las celdas */
+    }
+    a.agregar {
+        padding: 8px 15px; /* Ajusta el espaciado del enlace "Agregar Nuevo Registro" */
+    }
+    /* Estilo para los enlaces de editar y eliminar en resoluciones pequeñas */
+    a.editar, a.eliminar {
+        padding: 3px 7px; /* Ajusta el espaciado de los enlaces "Editar" y "Eliminar" */
+        font-size: 8px; /* Reduce el tamaño de fuente de los enlaces */
+    }
+}

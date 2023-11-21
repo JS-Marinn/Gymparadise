@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/assets/img/GymLogo.ico">
+    <link rel="stylesheet" type="text/css" href="/css/errores.css">
+</head>
+    <title th:text="#{404_titulo}">Error 404 - Página no encontrada</title>
+</head>
+<body>
+    <div class="container">
+        <h1 th:text="#{404_h1}">Error 404</h1>
+        <p th:text="#{404_p}">Lo sentimos, la página que estás buscando no se encuentra.</p>
+        <a href="/" class="btn" th:text="#{404_a}">Volver a la página de inicio</a>
+    </div>
+</body>
+</html>

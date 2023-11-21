@@ -1,0 +1,378 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Montserrat", sans-serif;
+}
+
+body {
+	height: 100vh;
+	background-color: black;
+	background-size: cover;
+	background-position: center;
+}
+
+li {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+	color: #fff;
+	font-size: 1rem;
+}
+
+a:hover {
+	color: #fff;
+	font-weight: bold;
+}
+
+/* Header */
+
+header {
+	position: relative;
+	padding: 0 2rem;
+	background-color: #000;
+}
+
+.navbar {
+	width: 100%;
+	height: 60px;
+	max-width: 1200px;
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.navbar .logo a {
+	font-size: 1.5rem;
+	font-weight: bold;
+}
+
+.navbar .links {
+	display: flex;
+	gap: 2rem;
+}
+
+.navbar .toggle_btn {
+	color: white;
+	font-size: 1.5rem;
+	cursor: pointer;
+	display: none;
+}
+
+.action_btn {
+	background-color: rgb(255, 128, 64);
+	color: #fff;
+	padding: 0.5rem 1rem;
+	border: none;
+	outline: none;
+	border-radius: 20px;
+	font-size: 0.8rem;
+	font-weight: bold;
+	cursor: pointer;
+	transition: scale 0.2 ease;
+}
+
+.action_btnI {
+	background-color: #9fd5d1;
+	color: #fff;
+	padding: 0.5rem 1rem;
+	border: none;
+	outline: none;
+	border-radius: 20px;
+	font-size: 0.8rem;
+	font-weight: bold;
+	cursor: pointer;
+	transition: scale 0.2 ease;
+}
+
+.action_btnI a i {
+	color: #35682d;
+}
+
+.action_btn:hover {
+	scale: 1.05;
+	color: #fff;
+}
+
+.action_btn:active {
+	scale: 0.95;
+}
+
+/* DropDown menu */
+
+.dropdown_menu {
+	display: none;
+	position: absolute;
+	right: 2rem;
+	top: 60px;
+	height: 0;
+	width: 90%;
+	background: rgba(255, 255, 255, 0.1);
+	border-radius: 10px;
+	overflow: hidden;
+	transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	backdrop-filter: blur(10px);
+}
+
+.dropdown_menu.open {
+	height: 270px;
+}
+
+.dropdown_menu li {
+	padding: 0.7rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.dropdown_menu .action_btn {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.dropdown_menu .action_btnI {
+	width: 30%;
+	display: flex;
+	justify-content: center;
+}
+
+/* footer */
+
+footer {
+	position: relative;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: #111;
+	height: auto;
+	width: 100vw;
+	padding-top: 40px;
+	color: #fff;
+}
+
+.footer-content {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	text-align: center;
+}
+
+.footer-content h3 {
+	font-size: 1.8rem;
+	font-weight: 400;
+	text-transform: capitalize;
+	line-height: 3rem;
+}
+
+.footer-content p {
+	max-width: 500px;
+	margin: 10px auto;
+	line-height: 28px;
+	font-size: 14px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+.footer-content img {
+	width: 200px;
+}
+
+.socials {
+	list-style: none;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 1rem 0 1rem 0;
+}
+
+.socials li {
+	margin: 0 10px;
+}
+
+.socials a {
+	text-decoration: none;
+	color: #fff;
+}
+
+.socials a i {
+	font-size: 1.1rem;
+	transition: color .4s ease;
+}
+
+.socials a:hover i {
+	color: aqua;
+}
+
+.footer-bottom {
+	background: #000;
+	width: 100vw;
+	padding: 20px 0;
+	text-align: center;
+}
+
+.footer-bottom p {
+	font-size: 14px;
+	word-spacing: 2px;
+	text-transform: capitalize;
+}
+
+.footer-bottom span {
+	text-transform: uppercase;
+	opacity: .4;
+	font-weight: 200;
+}
+/* Estilo para language-dropdown y sus hijos */
+/* Estilo para la sección de lenguaje en la barra de navegación */
+.navbar .language-dropdown {
+	display: flex;
+	align-items: center;
+	margin-right: 1rem;
+	background-color: #333;
+	/* Fondo oscuro para resaltar */
+	border-radius: 4px;
+	/* Bordes redondeados */
+	padding: 8px 12px;
+	/* Espaciado interior */
+	transition: background-color 0.3s;
+	/* Transición de color suave */
+}
+
+/* Estilo para el label dentro de language-dropdown */
+.navbar .language-dropdown .language-label {
+	margin-right: 0.5rem;
+	color: #fff;
+	font-size: 1rem;
+	/* Texto en negrita */
+}
+
+/* Estilo para el select dentro de language-dropdown */
+.navbar .language-dropdown .language-select {
+	background: transparent;
+	border: none;
+	color: #fff;
+	font-size: 16px;
+	appearance: none;
+	/* Elimina los estilos nativos del select */
+	padding: 4px;
+	/* Espaciado interior */
+	border-radius: 4px;
+	/* Bordes redondeados */
+	cursor: pointer;
+	/* Cambiar el cursor al pasar sobre el select */
+	
+}
+
+.language-dropdown span i{
+	color: #fff;
+	font-size: 16px;
+}
+
+.custom-select{
+	display: flex;
+	align-items: center;
+}
+
+/* Cambiar el color del select cuando está enfocado */
+.navbar .language-dropdown .language-select:focus {
+	outline: none;
+	/* Eliminar el contorno predeterminado */
+	box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+	/* Sutil sombra cuando está enfocado */
+}
+
+/* Cambiar el color de fondo del dropdown cuando el select está abierto */
+.navbar .language-dropdown .language-select:active,
+.navbar .language-dropdown .language-select:focus {
+	background-color: #444;
+	/* Color de fondo ligeramente más oscuro cuando está abierto */
+}
+
+/* Responsive */
+
+@media (max-width: 996px) {
+
+	.navbar .links,
+	.navbar .action_btn {
+		display: none;
+	}
+
+	.navbar .toggle_btn {
+		display: block;
+	}
+
+	.dropdown_menu {
+		display: block;
+	}
+
+	.logo {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		justify-items: center;
+	}
+
+}
+
+@media (max-width: 576px) {
+	.dropdown_menu {
+		left: 2rem;
+		width: unset;
+	}
+		.navbar .language-dropdown .language-select {
+	font-size: 12px;
+}
+}
+
+@media (max-width: 430px) {
+		.navbar .language-dropdown .language-select {
+	font-size: 10px;
+}
+}
+
+/* Asegúrate de agregar reglas de estilo para mostrar el menú de idiomas cuando sea necesario en la versión móvil. */
+@media (max-width: 996px) {
+	.language-dropdown {
+		display: none;
+	}
+}
+
+
+
+
+
+
+
+/* Estilos base para Galaxy Fold (ajusta según tus necesidades) */
+@media screen and (max-width: 404px) {
+    .dropdown_menu {
+        right: 0.5rem;
+    }
+
+    .navbar .language-dropdown {
+        margin-right: 30px;
+
+    }
+
+    .navbar .language-dropdown .language-label {
+        display: none;
+    }
+
+    .navbar .language-dropdown .language-select {
+        font-size: 10px;
+		width: 0;
+
+    }
+	
+}
+
+/* Asegúrate de agregar reglas de estilo para mostrar el menú de idiomas cuando sea necesario en la versión móvil. */
+@media (max-width: 996px) {
+    .language-dropdown {
+        display: block;
+    }
+}
+
